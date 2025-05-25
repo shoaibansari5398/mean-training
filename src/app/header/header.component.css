@@ -1,4 +1,11 @@
-h1{
-    color: blue;
-    font-style: italic;
+.logo-img {
+  height: 8vh;
+  width: 25vh;
+  cursor: pointer;
+}
+
+.cart-img {
+  height: 8vh;
+  width: 8vh;
+  cursor: pointer;
 }
