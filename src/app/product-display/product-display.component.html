@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3" *ngFor="let product of productsArr">
+      <div class="card" style="width: 18rem">
+        <img
+          class="card-img-top"
+          [src]="product.imageUrl"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ product.productName }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+          <p class="card-text">Cost :{{ product.price }}</p>
+          <p class="card-text">Quantity : {{ product.quantity }}</p>
+          <input type="button" class="btn btn-primary" value="Add To Cart" (click)="addToCart(product)"/>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-add-to-cart *ngIf="showAddToCart" [selectedProduct]="selectedProduct"></app-add-to-cart>
+
+
+
+<!-- <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src={{productsArr[0].imageUrl}} alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{productsArr[0].productName}}</h5>
+    <p class="card-text">{{productsArr[0].description}}</p>
+    <p class="card-text">Cost :{{productsArr[0].price}}</p>
+    <p class="card-text">Quantity : {{productsArr[0].quantity}}</p>
+    <a href="#" class="btn btn-primary">Add to Cart</a>
+  </div>
+</div> -->

@@ -1,0 +1,24 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3">
+      <div class="card" style="width: 18rem">
+        <img
+          class="card-img-top"
+          [src]="product?.imageUrl"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ product?.productName }}</h5>
+          <p class="card-text">{{ product?.description }}</p>
+          <p class="card-text">Cost :{{ product?.price }}</p>
+          <p class="card-text">Quantity : {{ product?.quantity }}</p>
+          <input type="button" value="-" class="bg-success" (click)="decreaseQuantity()" [disabled]="quantitySelected<=1" >
+          {{quantitySelected}}
+          <input type="button" value="+" class="bg-success" (click)="increaseQuantity()" [disabled]="product && quantitySelected>=product.quantity">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
