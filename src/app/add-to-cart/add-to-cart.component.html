@@ -13,9 +13,11 @@
           <p class="card-text">{{ product?.description }}</p>
           <p class="card-text">Cost :{{ product?.price }}</p>
           <p class="card-text">Quantity : {{ product?.quantity }}</p>
-          <input type="button" value="-" class="bg-success" (click)="decreaseQuantity()" [disabled]="quantitySelected<=1" >
+          <input type="button" value="Confirm" (click)="confirmEventHandler()"/>
+          <input type="button" value="-" class="" (click)="decreaseQuantity()" [disabled]="quantitySelected<=1" >
           {{quantitySelected}}
-          <input type="button" value="+" class="bg-success" (click)="increaseQuantity()" [disabled]="product && quantitySelected>=product.quantity">
+          <input type="button" value="+" class="" (click)="increaseQuantity()" [disabled]="product && quantitySelected>=product.quantity">
+          <input type="button" value="Cancel" (click)="cancelEventHandler()"/>
           
         </div>
       </div>

@@ -1,21 +1,19 @@
 import { Component } from '@angular/core';
 import { Products } from '../../model/Products';
-import { Cart } from '../Cart';
+import { SearchArrPipe } from "../search-arr.pipe";
 
 @Component({
-  selector: 'app-product-display',
-  standalone: false,
-  templateUrl: './product-display.component.html',
-  styleUrl: './product-display.component.css',
+  selector: 'app-search-products',
+  imports: [SearchArrPipe],
+  templateUrl: './search-products.component.html',
+  styleUrl: './search-products.component.css',
 })
-export class ProductDisplayComponent {
+export class SearchProductsComponent {
   productsArr: Products[];
-  showAddToCart: boolean;
-  selectedProduct: Products | null;
+  searchText: string;
 
   constructor() {
-    this.showAddToCart = false;
-    this.selectedProduct = null;
+    this.searchText=""
     this.productsArr = [
       new Products(
         1,
@@ -60,35 +58,9 @@ export class ProductDisplayComponent {
     ];
   }
 
-  addToCart(selectedProduct: Products) {
-    console.log("add cart clicked")
-    this.selectedProduct = selectedProduct;
-    this.showAddToCart = true;
+  searchEventHandler(text: string) {
+    this.searchText = text;
   }
-
-  sendDataFromAddToCartToPDEventHandler(cartObj:Cart|null){
-    if(cartObj!=null){
-
-      // update the quantity in productarr
-      var pos = this.productsArr.findIndex(product => product.productId == cartObj.productId)
-      if (pos >= 0) {
-        this.productsArr[pos].quantity -= cartObj.quantitySelected;
-      }
-      // unmount the child component
-      this.showAddToCart=false;
-      // selectProduct--null
-      this.selectedProduct=null;
-
-
-    }
-
-  }
-  sendCancelEventFromAddToCartPDEventHandler(){
-
-      this.showAddToCart=false;
-      // selectProduct--null
-      this.selectedProduct=null;
-
-  }
-
 }
+
+
