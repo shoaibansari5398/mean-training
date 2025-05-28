@@ -1,51 +1,64 @@
-<p>register-template works!</p>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4 bg-white rounded-4 shadow p-4">
+      <h4 class="text-center text-primary mb-4">Register</h4>
 
-<div class="container">
-  <div class="row">
-    <div class="col-4 offset-4 bg-primary">
       <form #registerTemplateForm="ngForm" (ngSubmit)="submitEventHandler(registerTemplateForm.form.value)" novalidate>
+        <!-- Email Field -->
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
+          <label for="exampleInputEmail1" class="form-label text-primary">Email address</label>
           <input
             type="email"
             class="form-control"
             id="exampleInputEmail1"
-            aria-describedby="emailHelp"
             name="txtEmail"
             ngModel
             #email="ngModel"
             required
             pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            [ngClass]="{
+              'is-invalid': email.invalid && email.touched,
+              'is-valid': email.valid && email.touched
+            }"
           />
-          <div *ngIf="email.invalid && email.touched" class="alert alert-danger">
+          <div *ngIf="email.invalid && email.touched" class="invalid-feedback d-block">
             <p *ngIf="email.errors?.['required']">Email is required</p>
             <p *ngIf="email.errors?.['pattern']">Email is invalid</p>
           </div>
         </div>
+
+        <!-- Password Field -->
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <label for="exampleInputPassword1" class="form-label text-primary">Password</label>
           <input
             type="password"
             class="form-control"
             id="exampleInputPassword1"
+            name="txtPassword"
             ngModel
             #password="ngModel"
             required
             minlength="8"
-            name="txtPassword"
             appCheckPasswordPattern
+            [ngClass]="{
+              'is-invalid': password.invalid && password.touched,
+              'is-valid': password.valid && password.touched
+            }"
           />
-          <div *ngIf="password.invalid && password.touched" class="alert alert-danger">
+          <div *ngIf="password.invalid && password.touched" class="invalid-feedback d-block">
             <p *ngIf="password.errors?.['required']">Password is required</p>
             <p *ngIf="password.errors?.['passwordPattern']">Password is invalid</p>
+            <p *ngIf="password.errors?.['minlength']">Password should be at least 8 characters long</p>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary" [disabled]="!registerTemplateForm.form.valid">Submit</button>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100" [disabled]="!registerTemplateForm.form.valid">Submit</button>
       </form>
-      <div style="color: white">
-        Form Values: {{ registerTemplateForm.form.value | json }}
+
+      <!-- Debug Output -->
+      <div class="mt-4 text-primary small">
+        <strong>Form Values:</strong> {{ registerTemplateForm.form.value | json }}
       </div>
     </div>
   </div>
