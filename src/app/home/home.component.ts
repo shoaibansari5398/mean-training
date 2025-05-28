@@ -1,25 +1,25 @@
 import { Component } from '@angular/core';
+import { Cart } from '../Cart';
 
 @Component({
   selector: 'app-home',
   standalone: false,
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
-
 export class HomeComponent {
-  showCart: boolean;
-  constructor() {
-    this.showCart = false;
+  showCart: boolean = false;
+  cartData: Cart[];
+
+  constructor(){
+    this.cartData = [];
   }
- 
+
   showElement(componentName: string) {
-    if (componentName == 'cart') {
-      this.showCart = true;
-    }
-    else {
-      this.showCart = false;
- 
-    }
+    this.showCart = componentName === 'cart';
+  }
+
+  receiveCartData(cart: Cart[]) {
+    this.cartData = cart;
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Products } from '../../model/Products';
 import { Cart } from '../Cart';
 
@@ -12,10 +12,13 @@ export class ProductDisplayComponent {
   productsArr: Products[];
   showAddToCart: boolean;
   selectedProduct: Products | null;
+  cart: any[];
+  @Output() cartChanged: EventEmitter<Cart[]> = new EventEmitter<Cart[]>();
 
   constructor() {
     this.showAddToCart = false;
     this.selectedProduct = null;
+    this.cart = [];
     this.productsArr = [
       new Products(
         1,
@@ -61,34 +64,33 @@ export class ProductDisplayComponent {
   }
 
   addToCart(selectedProduct: Products) {
-    console.log("add cart clicked")
+    console.log('add cart clicked');
     this.selectedProduct = selectedProduct;
     this.showAddToCart = true;
   }
 
-  sendDataFromAddToCartToPDEventHandler(cartObj:Cart|null){
-    if(cartObj!=null){
+  sendDataFromAddToCartToPDEventHandler(cartObj: Cart | null) {
+    if (cartObj != null) {
+      const pos = this.productsArr.findIndex(
+        (product) => product.productId == cartObj.productId
+      );
 
-      // update the quantity in productarr
-      var pos = this.productsArr.findIndex(product => product.productId == cartObj.productId)
       if (pos >= 0) {
         this.productsArr[pos].quantity -= cartObj.quantitySelected;
       }
-      // unmount the child component
-      this.showAddToCart=false;
-      // selectProduct--null
-      this.selectedProduct=null;
 
+      this.cart.push(cartObj);
 
+      this.cartChanged.emit(this.cart); // Emit updated cart
+
+      this.showAddToCart = false;
+      this.selectedProduct = null;
     }
-
-  }
-  sendCancelEventFromAddToCartPDEventHandler(){
-
-      this.showAddToCart=false;
-      // selectProduct--null
-      this.selectedProduct=null;
-
   }
 
+  sendCancelEventFromAddToCartPDEventHandler() {
+    this.showAddToCart = false;
+    // selectProduct--null
+    this.selectedProduct = null;
+  }
 }

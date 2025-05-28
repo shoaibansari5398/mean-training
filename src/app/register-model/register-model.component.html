@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4 offset-4 bg-primary">
+      <form [formGroup]="registerModelFormGroup" novalidate>
+        <div
+          class="mb-3"
+          [ngClass]="{
+            'has-danger': emailId.invalid && (emailId.dirty || emailId.touched),
+            'has-success': emailId.valid && emailId.dirty
+          }"
+        >
+          <label for="exampleInputEmail1" class="form-label"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            formControlName="emailId"
+          />
+          <p style="color: white">
+            errors :
+            {{ registerModelFormGroup.controls["emailId"].errors | json }}
+          </p>
+          <div *ngIf="emailId.invalid && emailId.touched">
+            <div
+              *ngIf="registerModelFormGroup.controls['emailId'].errors?.['pattern']"
+              class="alert alert-danger"
+            >
+              Email is invalid
+            </div>
+            <div
+              *ngIf="registerModelFormGroup.controls['emailId'].errors?.['required']"
+              class="alert alert-danger"
+            >
+              Email is required
+            </div>
+          </div>
+        </div>
+        <div
+          class="mb-3"
+          [ngClass]="{
+            'has-danger':
+              password.invalid && (password.dirty || password.touched),
+            'has-success': password.valid && password.dirty
+          }"
+        >
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            formControlName="password"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <div style="color: white">
+        Form Values: {{ registerModelFormGroup.value | json }} form status:
+        {{ registerModelFormGroup.status }}
+      </div>
+      <div *ngIf="password.invalid && password.touched">
+        <!-- <div
+          *ngIf="registerModelFormGroup.controls['password'].errors?.['pattern']"
+          class="alert alert-danger"
+        >
+          Password is invalid
+        </div> -->
+        <div
+          *ngIf="registerModelFormGroup.controls['password'].errors?.['required']"
+          class="alert alert-danger"
+        >
+          Password is required
+        </div>
+        <div
+          *ngIf="registerModelFormGroup.controls['password'].errors?.['minlength']"
+          class="alert alert-danger"
+        >
+          Password should be 8 characters long
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

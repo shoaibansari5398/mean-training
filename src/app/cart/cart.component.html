@@ -1,1 +1,36 @@
-<p>cart works!</p>
+
+<div class="container py-4">
+  <div class="row g-4">
+    <div
+      class="col-12 col-sm-6 col-md-4 col-lg-3"
+      *ngFor="let item of cartItems"
+    >
+      <div class="card h-100 shadow-sm border-0 rounded-4">
+        <!-- Product Image -->
+        <div class="ratio ratio-4x3 overflow-hidden rounded-top">
+          <img
+            [src]="item.imageUrl"
+            alt="Product Image"
+            class="w-100 h-100 object-fit-contain"
+          />
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title fw-bold text-truncate">
+            {{ item.productName }}
+          </h5>
+          <p class="card-text text-muted small mb-1">
+            {{ item.description }}
+          </p>
+          <p class="card-text mb-1">
+            <strong>Cost:</strong> ₹{{ item.price }}
+          </p>
+          <p class="card-text mb-3">
+            <strong>Quantity:</strong> {{ item.quantitySelected }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

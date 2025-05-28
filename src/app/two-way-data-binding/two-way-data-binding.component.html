@@ -1,0 +1,16 @@
+<p>two-way-data-binding works!</p>
+
+<input type="text" [value]="countryName" (input)="inputEventHandler($event)" />
+
+<p>Hello {{ countryName }}</p>
+
+<input type="text" [(ngModel)]="personName" name="txtPersonName" />
+<p>Hello {{ personName }}</p>
+
+<select #fieldNameDDL [(ngModel)]="fieldName" name="ddlFieldName">
+  <option *ngFor="let item of fieldNameArr" [value]="item">
+    {{ item }}
+  </option>
+</select>
+
+<p>{{fieldName}}</p>

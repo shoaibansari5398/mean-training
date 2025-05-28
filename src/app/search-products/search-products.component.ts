@@ -1,19 +1,22 @@
 import { Component } from '@angular/core';
 import { Products } from '../../model/Products';
-import { SearchArrPipe } from "../search-arr.pipe";
 
 @Component({
   selector: 'app-search-products',
-  imports: [SearchArrPipe],
+  standalone: false,
   templateUrl: './search-products.component.html',
   styleUrl: './search-products.component.css',
 })
 export class SearchProductsComponent {
   productsArr: Products[];
   searchText: string;
+  fieldNameArr: string[];
+  fieldName: string;
+  selectedProduct:Products | null;
 
   constructor() {
     this.searchText=""
+    this.selectedProduct = null;
     this.productsArr = [
       new Products(
         1,
@@ -56,10 +59,18 @@ export class SearchProductsComponent {
         3
       ),
     ];
+    this.fieldName="";
+    this.fieldNameArr = ['productId','productName','price','quantity','description'];
   }
 
-  searchEventHandler(text: string) {
+  searchEventHandler(text: string, fieldName: string) {
     this.searchText = text;
+    this.fieldName = fieldName;
+  }
+
+  editEventHandler(selectedProduct: Products) {
+    console.log(selectedProduct)
+    this.selectedProduct = selectedProduct
   }
 }
 

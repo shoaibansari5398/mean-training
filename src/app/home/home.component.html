@@ -1,40 +1,31 @@
 <ng-template #productDisplay>
-    <div class="container">
-        <div class="row">
-            <div class="col-1 offset-11">
-                <input type="button" value="Cart" (click)="showElement('cart');" class="btn btn-success" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <app-product-display></app-product-display>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-1 offset-11">
+        <input type="button" value="Cart" (click)="showElement('cart')" class="btn btn-success" />
+      </div>
     </div>
- 
+    <div class="row">
+      <div class="col-12">
+        <app-product-display (cartChanged)="receiveCartData($event)"></app-product-display>
+      </div>
+    </div>
+  </div>
 </ng-template>
- 
- 
+
 <ng-template #cartDisplay>
-    <div class="container">
-        <div class="row">
-            <div class="col-1 offset-11">
-                <input type="button" value="Products" (click)="showElement('pd');" class="btn btn-success" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <app-cart></app-cart>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-1 offset-11">
+        <input type="button" value="Products" (click)="showElement('pd')" class="btn btn-success" />
+      </div>
     </div>
- 
+    <div class="row">
+      <div class="col-12">
+        <app-cart [cartItems]="cartData"></app-cart>
+      </div>
+    </div>
+  </div>
 </ng-template>
- 
- 
- 
- 
- 
-<ng-container *ngIf="!showCart;then productDisplay;else cartDisplay">
-    <p>Hello</p>
-</ng-container>
+
+<ng-container *ngIf="!showCart; then productDisplay; else cartDisplay"></ng-container>

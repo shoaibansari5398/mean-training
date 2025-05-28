@@ -1,0 +1,15 @@
+<p>edit-product works!</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-4 offset-4">
+            <form *ngIf="modifyProduct" >
+                <label>Product Id</label>
+                <p>{{modifyProduct.productId}}</p>
+                <label>Product Name</label>
+                <p>{{modifyProduct.productName}}</p>
+                <input type="text" class="form-control" [(ngModel)]="modifyProduct.price" name="txtPrice">
+            </form>
+        </div>
+    </div>
+</div>
